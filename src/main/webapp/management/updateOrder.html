@@ -135,103 +135,159 @@
                       <h3 class="h4">车辆信息</h3>
                     </div>
                     <div class="card-body">
-                      <form class="form-horizontal" method="post" action="../car/updateCar">
-                        <input type="hidden" id="id" name="id">
+                      <form class="form-horizontal" method="post" action="../orders/updateOrder">
+                       <input type="hidden" id="oid" name="oid">
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">名称</label>
+                          <label class="col-sm-3 form-control-label">订单编号</label>
                           <div class="col-sm-9">
-                            <input type="text" id="name" name="name" class="form-control">
+                            <input type="text" id="ordernum" class="form-control" disabled>
                           </div>
                         </div>
                         <div class="line"></div>
                          <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">品牌</label>
+                          <label class="col-sm-3 form-control-label">客户名称</label>
                           <div class="col-sm-9">
-                            <select name="brandid" id="brandid" class="form-control mb-3">
-                            
-                            </select>
-                          </div>
-                       
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">类型</label>
-                          <div class="col-sm-9">
-                            <select name="typeid" id="typeid" class="form-control mb-3">
-                            
-                            </select>
+                             <input type="text" id="cusername" name="cusername" class="form-control" disabled>
                           </div>
                        
                         </div>
                         <div class="line"></div>
                          <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">档位类型</label>
+                          <label class="col-sm-3 form-control-label">客户联系方式</label>
                           <div class="col-sm-9">
-                            <select name="gear" id="gear" class="form-control mb-3">
-                            <option value='自动挡'>自动挡</option>
-                            <option value='手动挡'>手动挡</option>
-                            <option value='手自一体'>手自一体</option>
-                            </select>
+                             <input type="text" id="cphone" name="cphone" class="form-control" disabled>
                           </div>
                        
                         </div>
                         <div class="line"></div>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">座位数</label>
+                          <label class="col-sm-3 form-control-label">车辆名称</label>
                           <div class="col-sm-9">
-                            <input type="number" id="seatcnt" name="seatcnt" class="form-control">
+                             <input type="text" id="carname" name="carname" class="form-control" disabled>
                           </div>
-                        </div>
-                        <div class="line"></div>
-                        
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">行李箱数</label>
-                          <div class="col-sm-9">
-                            <input type="number" id="trunkcnt" name="trunkcnt" class="form-control">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">建议乘坐人数</label>
-                          <div class="col-sm-9">
-                            <input type="number" id="ridecnt" name="ridecnt" class="form-control">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">热度</label>
-                          <div class="col-sm-9">
-                            <input type="number" id="hot" name="hot" class="form-control" disabled>
-                          </div>
+                       
                         </div>
                         <div class="line"></div>
                          <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">开始时间</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="starttime" name="starttime" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">结束时间</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="endtime" name="endtime" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
                           <label class="col-sm-3 form-control-label">价格</label>
                           <div class="col-sm-9">
-                            <input type="number" id="price" name="price" class="form-control">
+                             <input type="text" id="pricecnt" name="pricecnt" class="form-control" disabled>
                           </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">取车负责人</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="extractuname" name="extractuname" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">取车地</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="extractlocation" name="extractlocation" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">取车时间</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="extractdate" name="extractdate" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">还车负责人</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="stilluname" name="stilluname" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">还车地</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="stilllocation" name="stilllocation" class="form-control" disabled>
+                          </div>
+                       
+                        </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">还车时间</label>
+                          <div class="col-sm-9">
+                             <input type="text" id="stilldate" name="stilldate" class="form-control" disabled>
+                          </div>
+                       
                         </div>
                         <div class="line"></div>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">数量</label>
+                          <label class="col-sm-3 form-control-label">订单状态</label>
                           <div class="col-sm-9">
-                            <input type="number" id="surplusnum" name="surplusnum" class="form-control">
+                             <input type="text" id="state1" name="state1" class="form-control" disabled>
                           </div>
+                       
                         </div>
                         <div class="line"></div>
-                          <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">注册时间</label>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">订单创建时间</label>
                           <div class="col-sm-9">
-                            <input type="text" id="createtime"  class="form-control" disabled>
+                             <input type="text" id="createtime" name="createtime" class="form-control" disabled>
                           </div>
+                       
                         </div>
                         <div class="line"></div>
-                          <div class="form-group row">
+                        <div class="form-group row">
                           <label class="col-sm-3 form-control-label">更新时间</label>
                           <div class="col-sm-9">
-                            <input type="text" id="updatetime"  class="form-control" disabled>
+                             <input type="text" id="updatetime" name="updatetime" class="form-control" disabled>
                           </div>
+                       
                         </div>
+                        <div class="line"></div>
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">请选择--状态</label>
+                          <div class="col-sm-9">
+                            <select name="state" id="state" class="form-control mb-3">
+                            <option value='已取车'>已取车</option>
+                            <option value='已还车'>已还车</option>
+                    
+                            </select>
+                          </div>
+                       
+                        </div>
+                       <div class="line"></div>
+                        
+                         <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">请选择--取车或还车地</label>
+                          <div class="col-sm-9">
+                            <select name="location" id="location" class="form-control mb-3">
+                            
+                            </select>
+                          </div>
+                       
+                        </div>
+                         
+                        
                         <div class="line"></div>
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
@@ -277,15 +333,16 @@
     <script>
     $("#btn").click(function(event){
     	  
-    	  window.location.href='car_list.html';
+    	  window.location.href='orders_list.html';
       })
       
     </script>
        <script type="text/javascript">
        var xhr = new XMLHttpRequest();
-       function showAllCarType(){
+      
+       function showAllLocation(){
     		var options="";
-    		xhr.open("get", "../carType/getAllCarType", false);
+    		xhr.open("get", "../location/getAllLocation", false);
     		xhr.onreadystatechange = function(){
     			if(xhr.readyState==4&&xhr.status==200){
     				var temp = xhr.responseText;
@@ -294,33 +351,11 @@
     		        
     				for(var i in data){
     					
-    					options+="<option value='"+data[i].typeid+"'>"+data[i].typename+"</option>";
+    					options+="<option value='"+data[i].locationname+"'>"+data[i].locationname+"</option>";
     				}
     				
     					//document.getElementById("table1").innerHTML+=options;
-    			    $("#typeid").append(options);
-    			
-    			}
-    		}
-    		
-    		xhr.send(null);
-    	}
-       function showAllBrand(){
-    		var options="";
-    		xhr.open("get", "../brand/getAllBrand", false);
-    		xhr.onreadystatechange = function(){
-    			if(xhr.readyState==4&&xhr.status==200){
-    				var temp = xhr.responseText;
-    				var json = eval('('+temp+')');
-    				var data = json.listData;
-    		        
-    				for(var i in data){
-    					
-    					options+="<option value='"+data[i].brandid+"'>"+data[i].brandname+"</option>";
-    				}
-    				
-    					//document.getElementById("table1").innerHTML+=options;
-    			    $("#brandid").append(options);
+    			    $("#location").append(options);
     			
     			}
     		}
@@ -339,29 +374,44 @@
     		var searchs = searchStr.split("&");
     		 
     		//获得第一个参数和值
-    		var id = searchs[0].split("=");
-    		xhr.open("get", "../car/selectCarDetail?id="+id[1], false);
+    		var oid = searchs[0].split("=");
+    		xhr.open("get", "../orders/selectOrderDetail?oid="+oid[1], false);
     		xhr.onreadystatechange = function(){
     			if(xhr.readyState==4&&xhr.status==200){
     				var temp = xhr.responseText;
     				var json = eval('('+temp+')');
     				var data = json.listData;
     		        
-    		        $("#id").val(data.id);
-    		        $("#name").val(data.name);
-    		        $("#hot").val(data.hot);
-    		        $("#seatcnt").val(data.seatcnt);
-    		        $("#gear").val(data.gear);
-    		        $("#trunkcnt").val(data.trunkcnt);
-    		        $("#price").val(data.price);
-    		        $("#ridecnt").val(data.ridecnt);
-    		        $("#surplusnum").val(data.surplusnum);
-    		        var date=new Date(data.createtime);
-  	          	  var mydate=date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
-  	          	var date1=new Date(data.updatetime);
-	          	  var mydate1=date1.getFullYear()+"年"+(date1.getMonth()+1)+"月"+date1.getDate()+"日";
-	              $("#createtime").val(mydate);
-  		        $("#updatetime").val(mydate1);
+    		        $("#oid").val(data.oid);
+    		        $("#ordernum").val(data.oid);
+    		        $("#cusername").val(data.cusername);
+    		        $("#carname").val(data.carname);
+    		        $("#cphone").val(data.cphone);
+    		        $("#state1").val(data.state);
+    		        var date=new Date(data.starttime);
+  	          	    var mydate=date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+    		        $("#starttime").val(mydate);
+    		        var date1=new Date(data.endtime);
+  	          	    var mydate1=date1.getFullYear()+"年"+(date1.getMonth()+1)+"月"+date1.getDate()+"日";
+    		        $("#endtime").val(mydate1);
+    		        $("#pricecnt").val(data.pricecnt);
+    		        $("#extractuname").val(data.extractuname);
+    		        $("#extractlocation").val(data.extractlocation);
+    		        var date2=new Date(data.extractdate);
+  	          	    var mydate2=date2.getFullYear()+"年"+(date2.getMonth()+1)+"月"+date2.getDate()+"日";
+    		        $("#extractdate").val(mydate2);
+    		        $("#stilluname").val(data.stilluname);
+    		        $("#stilllocation").val(data.stilllocation);
+    		        var date3=new Date(data.stilldate);
+  	          	    var mydate3=date3.getFullYear()+"年"+(date3.getMonth()+1)+"月"+date3.getDate()+"日";
+    		        $("#stilldate").val(mydate3);
+    		   
+    		        var date4=new Date(data.createtime);
+  	          	    var mydate4=date4.getFullYear()+"年"+(date4.getMonth()+1)+"月"+date4.getDate()+"日"+date4.getHours()+"时"+date4.getMinutes()+"分"+date4.getSeconds()+"秒";
+  	          	    var date5=new Date(data.updatetime);
+	          	    var mydate5=date5.getFullYear()+"年"+(date5.getMonth()+1)+"月"+date5.getDate()+"日"+date5.getHours()+"时"+date5.getMinutes()+"分"+date5.getSeconds()+"秒";
+	                $("#createtime").val(mydate4);
+  		            $("#updatetime").val(mydate5);
     			
     			}
     		}
@@ -370,8 +420,7 @@
     	}
 
      (function(){
-	     showAllCarType();
-	     showAllBrand();
+	     showAllLocation();
 	     show();
       })();
 

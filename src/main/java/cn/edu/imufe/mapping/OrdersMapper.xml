@@ -19,6 +19,30 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+    <resultMap id="BaseResultMap1" type="cn.edu.imufe.bean.vo.OrderDetail" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="carid" property="carid" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="pricecnt" property="pricecnt" jdbcType="INTEGER" />
+    <result column="extractuid" property="extractuid" jdbcType="INTEGER" />
+    <result column="extractlocation" property="extractlocation" jdbcType="VARCHAR" />
+    <result column="extractdate" property="extractdate" jdbcType="TIMESTAMP" />
+    <result column="stilluid" property="stilluid" jdbcType="INTEGER" />
+    <result column="stilllocation" property="stilllocation" jdbcType="VARCHAR" />
+    <result column="stilldate" property="stilldate" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  <result column="cusername" property="cusername" jdbcType="VARCHAR" />
+  <result column="carname" property="carname" jdbcType="VARCHAR" />
+  <result column="cphone" property="cphone" jdbcType="VARCHAR" />
+  <result column="extractuname" property="extractuname" jdbcType="VARCHAR" />
+  <result column="stilluname" property="stilluname" jdbcType="VARCHAR" />
+  
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -382,4 +406,23 @@
       updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
+  <!-- 自增部分 -->
+    <select id="selectAllOrderDetail" resultMap="BaseResultMap1"  >
+   SELECT a.*,b.cusername,e.`name` as carname,b.cphone,c.uname as extractuname ,d.uname as stilluname
+from orders a,customer b,users c,users d,car e
+where a.carid=e.id
+and a.cid=b.cid
+and a.extractuid=c.uid
+and a.stilluid=d.uid
+  </select>
+  
+      <select id="selectOrderDetailById" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+   SELECT a.*,b.cusername,e.`name` as carname,b.cphone,c.uname as extractuname ,d.uname as stilluname
+from orders a,customer b,users c,users d,car e
+where a.carid=e.id
+and a.cid=b.cid
+and a.extractuid=c.uid
+and a.stilluid=d.uid
+and a.oid=#{oid}
+  </select>
 </mapper>

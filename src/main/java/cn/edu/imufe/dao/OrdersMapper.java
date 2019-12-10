@@ -2,6 +2,8 @@ package cn.edu.imufe.dao;
 
 import cn.edu.imufe.bean.Orders;
 import cn.edu.imufe.bean.OrdersExample;
+import cn.edu.imufe.bean.vo.OrderDetail;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,10 @@ public interface OrdersMapper {
     int updateByPrimaryKeySelective(Orders record);
 
     int updateByPrimaryKey(Orders record);
+    
+    List<OrderDetail> selectAllOrderDetail();
+    
+    OrderDetail selectOrderDetailById(Integer oid);
+    
+    
 }
