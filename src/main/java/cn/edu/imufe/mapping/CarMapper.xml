@@ -16,6 +16,23 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+   <resultMap id="BaseResultMap1" type="cn.edu.imufe.bean.vo.CarDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cartypeid" property="cartypeid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="hot" property="hot" jdbcType="INTEGER" />
+    <result column="seatcnt" property="seatcnt" jdbcType="INTEGER" />
+    <result column="gear" property="gear" jdbcType="VARCHAR" />
+    <result column="trunkcnt" property="trunkcnt" jdbcType="INTEGER" />
+    <result column="ridecnt" property="ridecnt" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="surplusnum" property="surplusnum" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="typename" property="typename" jdbcType="VARCHAR" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -335,4 +352,32 @@
       updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 自增部分 -->
+   <select id="selectAllCarDetail" resultMap="BaseResultMap1" >
+   SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+  </select>
+  <select id="selectCarDetailById" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+   SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.id=#{id}
+  </select>
+    <select id="selectCarDetailByBrandId" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+   SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.brandid=#{brandid}
+  </select>
+      <select id="selectCarDetailByCarTypeId" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+   SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.cartypeid=#{cartypeid}
+  </select>
 </mapper>

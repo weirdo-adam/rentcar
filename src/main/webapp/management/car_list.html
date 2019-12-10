@@ -75,15 +75,15 @@
           <ul class="list-unstyled">
                     <li><a href="#exampledropdownDropdown01" aria-expanded="false" data-toggle="collapse"> <i class="icon-home"></i>车辆管理 </a>
 					 <ul id="exampledropdownDropdown01" class="collapse list-unstyled ">
-                        <li><a href="car_list.html">车辆管理</a></li>
+                        <li class="active"><a href="car_list.html">车辆管理</a></li>
                         <li><a href="carType_list.html">车辆类型管理</a></li>
-                        <li ><a href="brand_list.html">车辆品牌管理</a></li>
+                        <li><a href="brand_list.html">车辆品牌管理</a></li>
                       </ul>
 					</li>
                     <li><a href="#exampledropdownDropdown02" aria-expanded="false" data-toggle="collapse""> <i class="icon icon-form"></i>办事处管理 </a>
 					<ul id="exampledropdownDropdown02" class="collapse list-unstyled ">
-                        <li ><a href="location_list.html">办事处信息管理</a></li>
-                        <li class="active"><a href="relation_list.html">办事处车辆管理</a></li>
+                        <li><a href="location_list.html">办事处信息管理</a></li>
+                        <li><a href="relation_list.html">办事处车辆管理</a></li>
                       </ul>
                       
 					</li>
@@ -96,7 +96,7 @@
                     <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon icon-user"></i>用户信息管理 </a>
                       <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                         <li><a href="customer_list.html">客户信息</a></li>
-                        <li><a href="users_list.html">管理员信息</a></li>
+                        <li ><a href="users_list.html">管理员信息</a></li>
                       
                       </ul>
                     </li>
@@ -108,75 +108,59 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">办事处管理</h2>
+              <h2 class="no-margin-bottom">车辆管理</h2>
             </div>
           </header>
                
-        <!--Page Title  -->
+             <!--Page Title  -->
         <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">办事处管理</a></li>
-              <li class="breadcrumb-item active">办事处车辆管理            </li>
+              <li class="breadcrumb-item"><a href="index.html">车辆管理</a></li>
+              <li class="breadcrumb-item active">车辆信息            </li>
             </ul>
           </div>
- <!-- Forms Section-->
-          <section class="forms"> 
+          <!-- Page Section -->
+  <section class="tables">   
             <div class="container-fluid">
-                <!-- Form Elements -->
-                <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-6">
                   <div class="card">
                     <div class="card-close">
                       <div class="dropdown">
-                        <button type="button" id="closeCard5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                        <div aria-labelledby="closeCard5" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a></div>
+                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="addCar.html" class="dropdown-item edit"> <i class="fa fa-gear"></i>Add</a></div>
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">新增办事处车辆</h3>
+                      <h3 class="h4">车辆信息</h3>
                     </div>
                     <div class="card-body">
-                      <form class="form-horizontal" method="post" action="../relation/addRelation">
-                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">办事处名称</label>
-                          <div class="col-sm-9">
-                            <select name="locationid" id="locationid" class="form-control mb-3">
+                      <div class="table-responsive">   
+                        <table class="table table-striped table-sm" id="table">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>品牌</th>
+                              <th>类型</th>
+                              <th>名称</th>
+                              <th>日租价</th>
+                              <th>剩余数量</th>
+                              <th>更新时间</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="table-body">
                             
-                            </select>
-                          </div>
-                       
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">车辆名称</label>
-                          <div class="col-sm-9">
-                            <select name="carid" id="carid" class="form-control mb-3">
-                            
-                            </select>
-                          </div>
-                       
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">数量</label>
-                          <div class="col-sm-9">
-                            <input type="number" name="cnt" class="form-control">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <div class="col-sm-4 offset-sm-3">
-                            <button type="button" id="btn" class="btn btn-secondary">返回</button>
-                            <button type="submit" class="btn btn-primary">提交</button>
-                          </div>
-                        </div>
-                      </form>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-           
-          </section>     
-                 
+            </div>
+          </section>       
+                      
           <!-- Page Footer-->
           <footer class="main-footer">
             <div class="container-fluid">
@@ -204,62 +188,42 @@
 
     <!-- Main File-->
     <script src="js/front.js"></script>
-    <script>
-    $("#btn").click(function(event){
-    	  
-    	  window.location.href='relation_list.html';
-      })
-      
-    </script>
-       <script type="text/javascript">
-       var xhr = new XMLHttpRequest();
-       function showAllCar(){
-    		var options="";
-    		xhr.open("get", "../car/getAllCar", false);
-    		xhr.onreadystatechange = function(){
-    			if(xhr.readyState==4&&xhr.status==200){
-    				var temp = xhr.responseText;
-    				var json = eval('('+temp+')');
-    				var data = json.listData;
-    		        
-    				for(var i in data){
-    					
-    					options+="<option value='"+data[i].id+"'>"+data[i].name+"</option>";
-    				}
-    				
-    					//document.getElementById("table1").innerHTML+=options;
-    			    $("#carid").append(options);
-    			
-    			}
-    		}
-    		
-    		xhr.send(null);
-    	}
-       function showAllLocation(){
-    		var options="";
-    		xhr.open("get", "../location/getAllLocation", false);
-    		xhr.onreadystatechange = function(){
-    			if(xhr.readyState==4&&xhr.status==200){
-    				var temp = xhr.responseText;
-    				var json = eval('('+temp+')');
-    				var data = json.listData;
-    		        
-    				for(var i in data){
-    					
-    					options+="<option value='"+data[i].locationid+"'>"+data[i].locationname+"</option>";
-    				}
-    				
-    					//document.getElementById("table1").innerHTML+=options;
-    			    $("#locationid").append(options);
-    			
-    			}
-    		}
-    		
-    		xhr.send(null);
-    	}
+        <script type="text/javascript">
+var xhr = new XMLHttpRequest();
+function showAll(){
+	var options="";
+	xhr.open("get", "../car/getAllCarDetail", false);
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4&&xhr.status==200){
+			var temp = xhr.responseText;
+	        var json = eval('('+temp+')');
+			var data = json.listData;
+	    
+	       
+			for(var i in data){
+				var date=new Date(data[i].updatetime);
+	          	  var mydate=date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+	          	
+	          	options+="<tr><th scope='row'>"+i+"</th><td>"+data[i].brandname+"</td><td>"
+				+data[i].typename+"</td><td>"
+				+data[i].name+"</td><td>"
+				+data[i].price+"</td><td>"
+				+data[i].surplusnum+"</td><td>"
+				+mydate+"</td><td>"
+				+"<a href='updateCar.html?id="+data[i].id+"' class='edit'>"+"查看"+"</a>"+"</td></tr>";
+			
+			}
+
+		    $("#table-body").append(options);
+		
+		}
+	}
+	
+	xhr.send(null);
+}
      (function(){
-	     showAllCar();
-	     showAllLocation();
+	     showAll();
+	
       })();
 
 </script>

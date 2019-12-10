@@ -2,6 +2,8 @@ package cn.edu.imufe.dao;
 
 import cn.edu.imufe.bean.Car;
 import cn.edu.imufe.bean.CarExample;
+import cn.edu.imufe.bean.vo.CarDetail;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,12 @@ public interface CarMapper {
     int updateByPrimaryKeySelective(Car record);
 
     int updateByPrimaryKey(Car record);
+    
+    List<CarDetail> selectAllCarDetail();
+    
+    CarDetail selectCarDetailById(Integer id);
+    
+    CarDetail selectCarDetailByBrandId(Integer brandid);
+    
+    CarDetail selectCarDetailByCarTypeId(Integer cartypeid);
 }
