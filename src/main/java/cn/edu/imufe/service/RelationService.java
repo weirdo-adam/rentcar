@@ -10,4 +10,5 @@ public interface RelationService {
        RelationDetail selectRelationDetailById(int id);
        boolean addRelation(Relation temp);
        boolean updateRelation(Relation temp);
+       Relation selectByCarIdAndLocationId(int carid,int locationid);
 }

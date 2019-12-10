@@ -33,4 +33,7 @@ public interface RelationMapper {
     List<RelationDetail> selectAllRelation(int locationid);
     
     RelationDetail selectRelationDetailById(Integer id);
+    
+    Relation selectByCarIdAndLocationId(@Param("carid") Integer carid, @Param("locationid") Integer locationid);
+
 }

@@ -215,4 +215,10 @@ where a.carid=b.id
 and a.locationid=c.locationid
 and a.locationid=#{locationid,jdbcType=INTEGER}
   </select>
+   <select id="selectByCarIdAndLocationId" resultMap="BaseResultMap"  >
+    select *
+    from relation
+    where carid = #{carid}
+    and locationid=#{locationid}
+  </select>
 </mapper>

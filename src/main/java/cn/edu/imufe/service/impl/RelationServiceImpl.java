@@ -42,4 +42,10 @@ public class RelationServiceImpl implements RelationService {
 		return false;
 	}
 
+	@Override
+	public Relation selectByCarIdAndLocationId(int carid, int locationid) {
+		Relation temp=relationDao.selectByCarIdAndLocationId(carid, locationid);
+		return temp;
+	}
+
 }

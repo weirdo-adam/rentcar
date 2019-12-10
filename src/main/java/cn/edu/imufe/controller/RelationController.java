@@ -67,6 +67,7 @@ public class RelationController {
     }
 	/**
 	 * 新增办事处车辆关系信息
+	 * 先判断该办事处是否已存在该车辆，如果存在则在原来的基础上增加，如果没有新增一条记录
 	 * @param request
 	 * @param model
 	 * @param response
@@ -79,11 +80,18 @@ public class RelationController {
        String carid=request.getParameter("carid");
        String locationid=request.getParameter("locationid");
        String cnt=request.getParameter("cnt");
-       Relation temp=new Relation();
-       temp.setCarid(Integer.parseInt(carid));
-       temp.setCnt(Integer.parseInt(cnt));
-       temp.setLocationid(Integer.parseInt(locationid));
-       relationServiceImpl.addRelation(temp);
+       Relation flag=relationServiceImpl.selectByCarIdAndLocationId(Integer.parseInt(carid), Integer.parseInt(locationid));
+       if(flag!=null) {
+    	   flag.setCnt(flag.getCnt()+Integer.parseInt(cnt));
+    	   relationServiceImpl.updateRelation(flag);
+       }else {
+    	   Relation temp=new Relation();
+           temp.setCarid(Integer.parseInt(carid));
+           temp.setCnt(Integer.parseInt(cnt));
+           temp.setLocationid(Integer.parseInt(locationid));
+           relationServiceImpl.addRelation(temp);
+       }
+       
        return "redirect:../management/relation_list.html";
       
     }
