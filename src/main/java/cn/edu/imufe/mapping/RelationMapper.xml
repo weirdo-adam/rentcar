@@ -7,6 +7,14 @@
     <result column="carid" property="carid" jdbcType="INTEGER" />
     <result column="cnt" property="cnt" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="cn.edu.imufe.bean.vo.RelationDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="locationid" property="locationid" jdbcType="INTEGER" />
+    <result column="carid" property="carid" jdbcType="INTEGER" />
+    <result column="cnt" property="cnt" jdbcType="INTEGER" />
+    <result column="locationname" property="locationname" jdbcType="VARCHAR" />
+    <result column="carname" property="carname" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -193,4 +201,18 @@
       cnt = #{cnt,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectRelationDetailById" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+   select a.*,c.locationname,b.`name` as  carname
+from relation a,car b,location c
+where a.carid=b.id
+and a.locationid=c.locationid
+and a.id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllRelation" resultMap="BaseResultMap1" parameterType="java.lang.Integer">
+   select a.*,c.locationname,b.`name` as  carname
+from relation a,car b,location c
+where a.carid=b.id
+and a.locationid=c.locationid
+and a.locationid=#{locationid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -2,6 +2,8 @@ package cn.edu.imufe.dao;
 
 import cn.edu.imufe.bean.Relation;
 import cn.edu.imufe.bean.RelationExample;
+import cn.edu.imufe.bean.vo.RelationDetail;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,8 @@ public interface RelationMapper {
     int updateByPrimaryKeySelective(Relation record);
 
     int updateByPrimaryKey(Relation record);
+    
+    List<RelationDetail> selectAllRelation(int locationid);
+    
+    RelationDetail selectRelationDetailById(Integer id);
 }
