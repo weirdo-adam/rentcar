@@ -42,4 +42,10 @@ public class OrdersServiceImpl implements OrdersService {
 		return false;
 	}
 
+	@Override
+	public List<OrderDetail> selectAllOrderDetailByCId(int cid) {
+		List<OrderDetail> list=ordersDao.selectAllOrderDetailByCId(cid);
+		return list;
+	}
+
 }

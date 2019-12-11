@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.edu.imufe.bean.Customer;
 import cn.edu.imufe.bean.Orders;
 
 import cn.edu.imufe.bean.Users;
@@ -101,5 +102,25 @@ public class OrdersController {
        orderServiceImpl.updateOrders(temp);
        return "redirect:../management/orders_list.html";
       
+    }
+	/**
+	 * 根据客户ID获取所有订单
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/getAllOrderDetailByCId")
+    public void getAllOrderDetailByCId(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+		Customer temp=(Customer) request.getSession().getAttribute("loginCustomer");
+		List<OrderDetail> lists = orderServiceImpl.selectAllOrderDetailByCId(temp.getCid());
+        JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(lists));  
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("listData", jsonArray);
+		System.out.println(jsonObject);
+		response.setContentType("text/json"); 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;character=UTF-8");
+		response.getWriter().write(jsonObject.toString());
     }
 }

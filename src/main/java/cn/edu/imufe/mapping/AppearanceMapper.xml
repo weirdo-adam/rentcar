@@ -178,4 +178,10 @@
       aurl = #{aurl,jdbcType=VARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
+  <!-- 自增部分 -->
+    <select id="selectByCarId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from appearance
+    where carid = #{carid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package cn.edu.imufe.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class TrimServiceImpl implements TrimService {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public List<Trim> selectByCarId(int carid) {
+		List<Trim> list=trimDao.selectByCarId(carid);		
+		return list;
 	}
 
 }

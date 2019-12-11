@@ -27,4 +27,6 @@ public interface AppearanceMapper {
     int updateByPrimaryKeySelective(Appearance record);
 
     int updateByPrimaryKey(Appearance record);
+    
+    List<Appearance> selectByCarId(int carid);
 }

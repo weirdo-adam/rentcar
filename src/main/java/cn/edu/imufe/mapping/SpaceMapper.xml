@@ -178,4 +178,10 @@
       surl = #{surl,jdbcType=VARCHAR}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
+  <!-- 自增部分 -->
+   <select id="selectByCarId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from space
+    where carid = #{carid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -24,6 +24,7 @@ import cn.edu.imufe.bean.Space;
 import cn.edu.imufe.bean.Trim;
 import cn.edu.imufe.bean.Car;
 import cn.edu.imufe.bean.vo.CarDetail;
+import cn.edu.imufe.bean.vo.CarDetailAndPhoto;
 import cn.edu.imufe.service.impl.AppearanceServiceImpl;
 import cn.edu.imufe.service.impl.CarServiceImpl;
 import cn.edu.imufe.service.impl.SpaceServiceImpl;
@@ -215,5 +216,32 @@ public class CarController {
 				}
        return "redirect:../management/car_list.html";
       
+    }
+	/**
+	 * 获取所有车辆详细信息包括图片
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/selectCarDetailAndPhotoById")
+    public void selectCarDetailAndPhotoById(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+      String id=request.getParameter("carid");
+		CarDetail car=carServiceImpl.selectCarDetailById(Integer.parseInt(id));
+        List<Appearance> alist=appearanceServiceImpl.selectByCarId(Integer.parseInt(id));
+        List<Space> slist=spaceServiceImpl.selectByCarId(Integer.parseInt(id));
+        List<Trim> tlist=trimServiceImpl.selectByCarId(Integer.parseInt(id));
+        CarDetailAndPhoto temp=new CarDetailAndPhoto();
+        temp.setAlist(alist);
+        temp.setCarDetail(car);
+        temp.setSlist(slist);
+        temp.setTlist(tlist);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("listData", temp);
+		System.out.println(jsonObject);
+		response.setContentType("text/json"); 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;character=UTF-8");
+		response.getWriter().write(jsonObject.toString());
     }
 }

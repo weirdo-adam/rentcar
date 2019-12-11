@@ -10,4 +10,5 @@ public interface OrdersService {
        OrderDetail selectOrderDetailById(int id);
        boolean updateOrders(Orders temp);
        boolean addOrders(Orders temp);
+       List<OrderDetail> selectAllOrderDetailByCId(int cid);
 } 

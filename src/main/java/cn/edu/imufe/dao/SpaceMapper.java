@@ -27,4 +27,6 @@ public interface SpaceMapper {
     int updateByPrimaryKeySelective(Space record);
 
     int updateByPrimaryKey(Space record);
+    
+    List<Space> selectByCarId(int carid);
 }

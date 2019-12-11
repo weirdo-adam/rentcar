@@ -178,4 +178,9 @@
       turl = #{turl,jdbcType=VARCHAR}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
+    <select id="selectByCarId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from trim
+    where carid = #{carid,jdbcType=INTEGER}
+  </select>
 </mapper>

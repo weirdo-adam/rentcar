@@ -34,5 +34,5 @@ public interface OrdersMapper {
     
     OrderDetail selectOrderDetailById(Integer oid);
     
-    
+    List<OrderDetail> selectAllOrderDetailByCId(Integer cid);
 }

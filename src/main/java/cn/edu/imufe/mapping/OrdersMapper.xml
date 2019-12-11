@@ -425,4 +425,14 @@ and a.extractuid=c.uid
 and a.stilluid=d.uid
 and a.oid=#{oid}
   </select>
+  
+      <select id="selectAllOrderDetailByCId" resultMap="BaseResultMap1" parameterType="java.lang.Integer"  >
+   SELECT a.*,b.cusername,e.`name` as carname,b.cphone,c.uname as extractuname ,d.uname as stilluname
+from orders a,customer b,users c,users d,car e
+where a.carid=e.id
+and a.cid=b.cid
+and a.extractuid=c.uid
+and a.stilluid=d.uid
+and a.cid=#{cid}
+  </select>
 </mapper>

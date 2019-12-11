@@ -27,4 +27,6 @@ public interface TrimMapper {
     int updateByPrimaryKeySelective(Trim record);
 
     int updateByPrimaryKey(Trim record);
+    
+    List<Trim> selectByCarId(int carid);
 }
