@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.edu.imufe.bean.Customer;
-import cn.edu.imufe.bean.Users;
 import cn.edu.imufe.service.impl.CustomerServiceImpl;
 
 @Controller
@@ -106,4 +105,93 @@ public class CustomerController {
 		        customerServiceImpl.addCustomer(customer);
 		        return "redirect:../client/signin.html";  
 		    }
+			/**
+			 * 客户退出登录
+			 * @param request
+			 * @param model
+			 * @param response
+			 * @return
+			 */
+			 @RequestMapping(value = "/loginout")
+			    public String loginout(HttpServletRequest request, Model model, HttpServletResponse response){
+			        
+			      request.getSession().removeAttribute("loginCustomer");   
+			        return "redirect:../client/signin.html";  
+			    }
+			 /**
+				 * 根据ID获取客户信息
+				 * @param request
+				 * @param model
+				 * @param response
+				 * @throws IOException
+				 */
+				@RequestMapping(value = "/selectCustomer")
+			    public void SelectCustomer(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+					
+					Customer temp1=(Customer) request.getSession().getAttribute("loginCustomer");
+			       
+			        Customer temp=customerServiceImpl.selectById(temp1.getCid());
+			        JSONObject jsonObject = new JSONObject();
+					jsonObject.put("listData", temp);
+					System.out.println(jsonObject);
+					response.setContentType("text/json"); 
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("application/json;character=UTF-8");
+					response.getWriter().write(jsonObject.toString());
+			             
+				}
+				 /**
+				 * 根据ID更新客户信息
+				 * @param request
+				 * @param model
+				 * @param response
+				 * @throws IOException
+				 */
+				@RequestMapping(value = "/updateCustomer")
+			    public void updateCustomer(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+					 String contextPath = request.getContextPath();
+						PrintWriter out = response.getWriter();
+				        String cname=request.getParameter("cname1");
+				        String oldpwd=request.getParameter("oldpwd");
+				        String cusername=request.getParameter("cusername1");
+				        String cage=request.getParameter("cage1");
+				        String csex=request.getParameter("csex1");
+				        String cphone=request.getParameter("cphone1");
+				        String cemail=request.getParameter("cemail1");
+				        String cid=request.getParameter("cid");
+				        String newpwd=request.getParameter("newpwd");
+				        Customer temp=customerServiceImpl.selectById(Integer.parseInt(cid));
+			        if(temp==null) {
+			        	out.print("<script type='text/javascript'>"
+								+ "alert('Please Login');"+"location.href='"+contextPath + "/client/my.html';"
+								+ "</script>");
+						out.flush();
+						out.close();     
+			        }
+			        else if(!oldpwd.equals(temp.getCpassword())) {
+			        	out.print("<script type='text/javascript'>"
+								+ "alert('Old Password Error');"+"location.href='"+contextPath + "/client/my.html';"
+								+ "</script>");
+						out.flush();
+						out.close();     
+			        }
+			        else {
+			        	Customer customer=new Customer();
+			        	customer.setCid(Integer.parseInt(cid));
+			        	customer.setCname(cname);
+				        customer.setCpassword(newpwd);
+				        customer.setCusername(cusername);
+				        customer.setCage(Integer.parseInt(cage));
+				        customer.setCsex(csex);
+				        customer.setCphone(cphone);
+				        customer.setCemail(cemail);
+				        customerServiceImpl.updateCustomer(customer);
+				        out.print("<script type='text/javascript'>"
+								+ "alert('Success');"+"location.href='"+contextPath + "/client/my.html';"
+								+ "</script>");
+						out.flush();
+						out.close(); 
+			     
+			             }
+				}
 }
