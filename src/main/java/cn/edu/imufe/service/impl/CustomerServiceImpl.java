@@ -41,4 +41,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return false;
 	}
 
+	@Override
+	public Customer selectByCname(String cname) {
+		Customer temp=customerDao.selectByCname(cname);
+		return temp;
+	}
+
 }

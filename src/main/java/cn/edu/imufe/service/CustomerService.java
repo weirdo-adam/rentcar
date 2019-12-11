@@ -9,4 +9,5 @@ public interface CustomerService {
        Customer selectById(int id);
        boolean addCustomer(Customer temp);
        boolean updateCustomer(Customer temp);
+       Customer selectByCname(String cname);
 }

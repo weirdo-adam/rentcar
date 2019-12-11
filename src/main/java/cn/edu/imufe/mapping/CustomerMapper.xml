@@ -287,4 +287,12 @@
       cupdatetime = #{cupdatetime,jdbcType=TIMESTAMP}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+  <!-- 自增部分 -->
+    <select id="selectByCname" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where cname = #{cname}
+  </select>
+  
 </mapper>
