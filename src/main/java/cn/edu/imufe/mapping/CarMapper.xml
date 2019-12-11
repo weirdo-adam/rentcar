@@ -380,4 +380,27 @@ WHERE a.brandid=b.brandid
 and a.cartypeid=c.typeid
 and a.cartypeid=#{cartypeid}
   </select>
+        <select id="selectCarDetailByLocationId" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+    SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c,relation d
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.id=d.carid
+and d.cnt>0
+and d.locationid=#{locationid}
+  </select>
+         <select id="selectAllCarDetailMoreSeatCnt" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+    SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.seatcnt<![CDATA[ >= ]]> #{cnt}
+  </select>
+         <select id="selectAllCarDetailLessSeatCnt" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+      SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.seatcnt <![CDATA[ < ]]> #{cnt}
+  </select>
 </mapper>

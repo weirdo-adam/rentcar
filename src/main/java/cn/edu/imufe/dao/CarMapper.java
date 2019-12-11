@@ -34,7 +34,13 @@ public interface CarMapper {
     
     CarDetail selectCarDetailById(Integer id);
     
-    CarDetail selectCarDetailByBrandId(Integer brandid);
+    List<CarDetail> selectCarDetailByBrandId(Integer brandid);
     
-    CarDetail selectCarDetailByCarTypeId(Integer cartypeid);
+    List<CarDetail> selectCarDetailByCarTypeId(Integer cartypeid);
+    
+    List<CarDetail> selectCarDetailByLocationId(Integer locationid);
+    
+    List<CarDetail> selectAllCarDetailMoreSeatCnt(Integer cnt);
+    
+    List<CarDetail> selectAllCarDetailLessSeatCnt(Integer cnt);
 }

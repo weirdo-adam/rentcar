@@ -1,6 +1,7 @@
 package cn.edu.imufe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -238,6 +239,101 @@ public class CarController {
         temp.setTlist(tlist);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("listData", temp);
+		System.out.println(jsonObject);
+		response.setContentType("text/json"); 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;character=UTF-8");
+		response.getWriter().write(jsonObject.toString());
+    }
+	/**
+	 * 根据查询条件获取所有车辆详细信息
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/getAllCarDetailByKey")
+    public void getAllCarDetailByKey(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+        
+		String key=request.getParameter("key");
+		String id=request.getParameter("id");
+		List<CarDetailAndPhoto> lists=new ArrayList<CarDetailAndPhoto>();
+		if(key.equals("1")) { //按照取车地
+			List<CarDetail> list=carServiceImpl.selectCarDetailByLocationId(Integer.parseInt(id));
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		}
+		}
+		if(key.equals("2")) { //按照车辆类型
+			List<CarDetail> list=carServiceImpl.selectCarDetailByCarTypeId(Integer.parseInt(id));
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		}
+		}
+		
+        JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(lists));  
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("listData", jsonArray);
+		System.out.println(jsonObject);
+		response.setContentType("text/json"); 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;character=UTF-8");
+		response.getWriter().write(jsonObject.toString());
+    }
+	/**
+	 * 根据查询条件获取所有车辆详细信息
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/selectAllByflag")
+    public void selectAllFlag(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+        
+		String key=request.getParameter("flag");
+	
+		List<CarDetailAndPhoto> lists=new ArrayList<CarDetailAndPhoto>();
+		if(key.equals("0")) { //座位数不限
+			List<CarDetail> list=carServiceImpl.selectAllCarDetail();
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		}
+		}
+		if(key.equals("1")) { //7座及以上
+			List<CarDetail> list=carServiceImpl.selectAllCarDetailMoreSeatCnt(7);
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		}
+		}
+		if(key.equals("2")) { //7座以下
+			List<CarDetail> list=carServiceImpl.selectAllCarDetailLessSeatCnt(7);
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		}
+		}
+        JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(lists));  
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("listData", jsonArray);
 		System.out.println(jsonObject);
 		response.setContentType("text/json"); 
 		response.setCharacterEncoding("UTF-8");

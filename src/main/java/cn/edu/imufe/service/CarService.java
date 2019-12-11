@@ -11,6 +11,9 @@ public interface CarService {
       CarDetail selectCarDetailById(int id);
       boolean addCar(Car temp);
       boolean updateCar(Car temp);
-      CarDetail selectCarDetailByBrandId(int brandid);
-      CarDetail selectCarDetailByCarTypeId(int typeid);
+      List<CarDetail> selectCarDetailByBrandId(int brandid);
+      List<CarDetail> selectCarDetailByCarTypeId(int typeid);
+      List<CarDetail> selectCarDetailByLocationId(int locationid);
+      List<CarDetail> selectAllCarDetailMoreSeatCnt(int cnt);
+      List<CarDetail> selectAllCarDetailLessSeatCnt(int cnt);
 }

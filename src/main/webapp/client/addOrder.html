@@ -56,8 +56,7 @@
 					</div>
 				  </div>
 				</div>
-			  </li>
-		
+			
 			   <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">车型</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
@@ -127,25 +126,45 @@
   </div>
   <div class="ps-product--detail pt-60">
 	<div class="ps-container">
-	  <div class="row">
+	   <div class="row">
 		<div class="col-lg-10 col-md-12 col-lg-offset-1">
-		  <div class="ps-product__thumbnail">
-			<div class="ps-product__preview">
-			  <div class="ps-product__variants" id="carimage">
-				
-			  </div>
-			  
-			</div>
-	
-		 <div class="ps-product__image" id="imageitem">
 		
-			 
-			</div>
+		  <div class="ps-product__content mt-50">
+			<ul class="tab-list" role="tablist">
+			
+			  <li ><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">填写订单</a></li>
+			</ul>
 		  </div>
-		  <div class="ps-product__info" id="info">
-		
+		  <div class="tab-content mb-60">
+			<!--修改资料-->
+			<div class="tab-pane" role="tabpanel" id="tab_02">
+			  <form class="ps-product__review" action="../customer/updateCustomer" method="post" enctype="multipart/form-data">
+				<h4>订单信息</h4>
+					<div class="row">
+					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+					  <input type="hidden" name="carid" id="carid">
+						<div class="form-group">
+						  <label>车辆名称:<span>*</span></label>
+						  <input class="form-control" id="carname" name="carname" type="text" placeholder="" required="" disabled>
+						</div>
+						<div class="form-group">
+						  <label>租车时间:<span>*</span></label>
+						  <input class="form-control" id="comparedate" name="comparedate" type="text" placeholder="-" required="" >
+						</div>
+						
+					  </div>
+					  <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
+						
+						<div class="form-group">
+						  <button class="ps-btn ps-btn--sm">Submit<i class="ps-icon-next"></i></button>
+						</div>
+					  </div>
+				</div>
+			  </form>
+			</div>
+			
+			
 		  </div>
-		
 		</div>
 	  </div>
 	</div>
@@ -154,6 +173,68 @@
  
 </main>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="laydate/laydate.js"></script>
+    		<script>
+			//执行一个laydate实例
+		laydate.render({
+				elem: '#comparedate',
+				type: 'datetime',
+				range: true,
+				done: function(value, date, endDate) {
+					var year1= date.year;
+					var month1 = date.month;
+					var date1 = date.date;
+					var year2= endDate.year;
+					var month2 = endDate.month;
+					var date2 = endDate.date;
+				      if (month1 >= 1 && month1 <= 9) {
+				          month1 = "0" + month1;
+				      }
+				      if (date1 >= 0 && date1 <= 9) {
+				    	  date1 = "0" + date1;
+				      }
+				      if (month2 >= 1 && month2 <= 9) {
+				          month2 = "0" + month2;
+				      }
+				      if (date2 >= 0 && date2 <= 9) {
+				    	  date2 = "0" + date2;
+				      }
+					var date1=year1 + "-" + month1 + "-" + date1;
+					var date2=year2 + "-" + month2 + "-" + date2;
+					
+				        $.ajax({
+				              //几个参数需要注意一下
+				                  type: "POST",//方法类型
+				                  dataType: "json",//预期服务器返回的数据类型
+				                  data:{
+				                	  "date1":date1,
+				                	  "date2":date2},
+				                  url: "../orders/addOrder" ,//url
+				                  success: function (result) {
+				                      console.log(result);//打印服务端返回的数据(调试用)	
+				                      var checkData=result.listData;
+				                      var checkDate=new Array()
+				
+				                      var Gcheck=new Array()
+				                      
+				                      for(var i in checkData){
+				                    	  checkDate[i]=(new Date(parseFloat( checkData[i].createDate))).format("yyyy年MM月dd日");
+				                    	  
+				                    		  Gcheck[i]=[checkData[i].rescore];
+				                    			  
+				                    	
+				                      }
+				                      show(checkDate,Gcheck);
+				                    
+				                  },
+				                  error : function() {
+				                  	layer.msg("异常");
+				                  }
+				              });
+				}
+
+			});
+		</script>
 <script type="text/javascript">
 var xhr = new XMLHttpRequest();
 function showCarTypes(){
@@ -200,14 +281,16 @@ function showLocation(){
 			
 				//document.getElementById("table1").innerHTML+=options;
 		    $("#types-item1").append(options);
-		   
+		    $("#types-item2").append(options1);
 		    
 		}
 	}
 	
 	xhr.send(null);
 }
+
 function showAll(){
+	var options="";
 	var options="";
 	//获取Location对象的search属性值
 	var searchStr = location.search;
@@ -221,47 +304,23 @@ function showAll(){
 	//获得第一个参数和值
 	var carid = searchs[0].split("=");
 	
-	xhr.open("get", "../car/selectCarDetailAndPhotoById?carid="+carid[1], false);
+	xhr.open("get", "../car/selectCarDetail?id="+carid[1], false);
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4&&xhr.status==200){
 			var temp = xhr.responseText;
 			var json = eval('('+temp+')');
 			var data = json.listData;
-			console.log(data.carDetail.id)
-			options+="<h1>"+data.carDetail.name+"</h1><p class='ps-product__category'><a>"
-			+data.carDetail.typename+"</a>,<a>"+data.carDetail.gear+"</a></p><h3 class='ps-product__price'>"
-			+data.carDetail.brandname+"</h3><div class='ps-product__block ps-product__quickview'><h4>"+
-			"日租价: "+data.carDetail.price+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"座位数: "+data.carDetail.seatcnt+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"行李箱数: "+data.carDetail.trunkcnt+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"日租价: "+data.carDetail.price+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"热度: "+data.carDetail.hot+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"建议乘坐人数: "+data.carDetail.ridecnt+"</p></div><div class='ps-product__block ps-product__quickview'><h3><a href='addOrder.html?id="+data.carDetail.id+"'>"+
-			"立即下单"+"</a></h3></div>";
-				//document.getElementById("table1").innerHTML+=options;
-		   $("#info").append(options);
-		   var optionslist="";
-		   var optionsitem="";
-		   for(var i in data.alist){
-			   optionslist+="<div class='item'><img src='"+data.alist[i].aurl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.alist[i].aurl+"' alt></div>";
-		   }
-		   for(var i in data.slist){
-			   optionslist+="<div class='item'><img src='"+data.slist[i].surl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.slist[i].surl+"' alt></div>";
-		   }
-		   for(var i in data.tlist){
-			   optionslist+="<div class='item'><img src='"+data.tlist[i].turl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.tlist[i].turl+"' alt></div>";
-		   }
-		   $("#carimage").append(optionslist);
-		   $("#imageitem").append(optionsitem);
-
+			
+	
+		    $("#carname").val(data.name);
+		    $("#carid").val(data.id);
+		   
 		}
 	}
 	
 	xhr.send(null);
 }
+
      (function(){
     	 showCarTypes();
     	 showLocation();

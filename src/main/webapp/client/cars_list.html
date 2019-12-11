@@ -57,7 +57,6 @@
 				  </div>
 				</div>
 			  </li>
-		
 			   <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">车型</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
@@ -70,6 +69,7 @@
 				  </div>
 				</div>
 			  </li>
+			  
 			     <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">座位数</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
@@ -114,44 +114,21 @@
 	<p class="ps-service"><strong>海王</strong>: 来我的鱼塘，成为我的海王</p>
   </div>
 </div>
-
-
 <main class="ps-main">
-  <div class="test">
-	<div class="container">
-	  <div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-			</div>
-	  </div>
-	</div>
-  </div>
-  <div class="ps-product--detail pt-60">
+ 
+  <div class="ps-section--features-product ps-section masonry-root pt-100 pb-100">
 	<div class="ps-container">
-	  <div class="row">
-		<div class="col-lg-10 col-md-12 col-lg-offset-1">
-		  <div class="ps-product__thumbnail">
-			<div class="ps-product__preview">
-			  <div class="ps-product__variants" id="carimage">
-				
-			  </div>
-			  
-			</div>
-	
-		 <div class="ps-product__image" id="imageitem">
-		
-			 
-			</div>
+	  <div class="ps-section__header mb-50">
+		<h3 class="ps-section__title" data-mask="车辆">- 车辆</h3>
+	  </div>
+	  <div class="ps-section__content pb-50">
+		<div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
+		  <div class="ps-masonry" id="cars-list">
 		  </div>
-		  <div class="ps-product__info" id="info">
-		
-		  </div>
-		
 		</div>
 	  </div>
 	</div>
   </div>
- 
- 
 </main>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
@@ -195,12 +172,11 @@ function showLocation(){
 				options+="<li>"+data[i].locationname+"</td><td>"
 				+"<a href='cars_list.html?flag=1&locationid="+data[i].locationid+"'>"
 						+data[i].locationname+"</a></li>";
-				
+			
 			}
 			
 				//document.getElementById("table1").innerHTML+=options;
 		    $("#types-item1").append(options);
-		   
 		    
 		}
 	}
@@ -208,6 +184,7 @@ function showLocation(){
 	xhr.send(null);
 }
 function showAll(){
+	var options="";
 	var options="";
 	//获取Location对象的search属性值
 	var searchStr = location.search;
@@ -219,44 +196,27 @@ function showAll(){
 	var searchs = searchStr.split("&");
 	 
 	//获得第一个参数和值
-	var carid = searchs[0].split("=");
-	
-	xhr.open("get", "../car/selectCarDetailAndPhotoById?carid="+carid[1], false);
+	var flag = searchs[0].split("=");
+	var id = searchs[1].split("=");
+
+	xhr.open("get", "../car/getAllCarDetailByKey?key="+flag[1]+"&id="+id[1], false);
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4&&xhr.status==200){
 			var temp = xhr.responseText;
 			var json = eval('('+temp+')');
 			var data = json.listData;
-			console.log(data.carDetail.id)
-			options+="<h1>"+data.carDetail.name+"</h1><p class='ps-product__category'><a>"
-			+data.carDetail.typename+"</a>,<a>"+data.carDetail.gear+"</a></p><h3 class='ps-product__price'>"
-			+data.carDetail.brandname+"</h3><div class='ps-product__block ps-product__quickview'><h4>"+
-			"日租价: "+data.carDetail.price+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"座位数: "+data.carDetail.seatcnt+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"行李箱数: "+data.carDetail.trunkcnt+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"日租价: "+data.carDetail.price+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"热度: "+data.carDetail.hot+"</p></div><div class='ps-product__block ps-product__quickview'><p>"+
-			"建议乘坐人数: "+data.carDetail.ridecnt+"</p></div><div class='ps-product__block ps-product__quickview'><h3><a href='addOrder.html?id="+data.carDetail.id+"'>"+
-			"立即下单"+"</a></h3></div>";
-				//document.getElementById("table1").innerHTML+=options;
-		   $("#info").append(options);
-		   var optionslist="";
-		   var optionsitem="";
-		   for(var i in data.alist){
-			   optionslist+="<div class='item'><img src='"+data.alist[i].aurl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.alist[i].aurl+"' alt></div>";
-		   }
-		   for(var i in data.slist){
-			   optionslist+="<div class='item'><img src='"+data.slist[i].surl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.slist[i].surl+"' alt></div>";
-		   }
-		   for(var i in data.tlist){
-			   optionslist+="<div class='item'><img src='"+data.tlist[i].turl+"' alt></div>";
-		       optionsitem+="<div class='item'><img src='"+data.tlist[i].turl+"' alt></div>";
-		   }
-		   $("#carimage").append(optionslist);
-		   $("#imageitem").append(optionsitem);
+			for(var i in data){
+				options+="<div class='grid-item'><div class='grid-item__content-wrapper'><div class='ps-shoe mb-30'><div class='ps-shoe__thumbnail'><img src='"
+					+data[i].alist[0].aurl+"'></div><div class='ps-shoe__content'>"
+					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='carDetail.html?carid="+data[i].carDetail.id+"'>"+data[i].carDetail.name+"</a>"
+					 +"<p class='ps-shoe__categories'>"+"日租价："+data[i].carDetail.price+"</p>"
+					+"</div></div></div></div></div>";
 
+			}
+			
+				//document.getElementById("table1").innerHTML+=options;
+		    $("#cars-list").append(options);
+		
 		}
 	}
 	

@@ -44,14 +44,29 @@ public class CarServiceImpl implements CarService {
 		return false;
 	}
 	@Override
-	public CarDetail selectCarDetailByBrandId(int brandid) {
-		CarDetail temp=carDao.selectCarDetailByBrandId(brandid);
+	public List<CarDetail> selectCarDetailByBrandId(int brandid) {
+		List<CarDetail> temp=carDao.selectCarDetailByBrandId(brandid);
 		return temp;
 	}
 	@Override
-	public CarDetail selectCarDetailByCarTypeId(int typeid) {
-		CarDetail temp=carDao.selectCarDetailByCarTypeId(typeid);
+	public List<CarDetail> selectCarDetailByCarTypeId(int typeid) {
+		List<CarDetail> temp=carDao.selectCarDetailByCarTypeId(typeid);
 		return temp;
+	}
+	@Override
+	public List<CarDetail> selectCarDetailByLocationId(int locationid) {
+		List<CarDetail> list=carDao.selectCarDetailByLocationId(locationid);
+		return list;
+	}
+	@Override
+	public List<CarDetail> selectAllCarDetailMoreSeatCnt(int cnt) {
+		List<CarDetail> list=carDao.selectAllCarDetailMoreSeatCnt(cnt);
+		return list;
+	}
+	@Override
+	public List<CarDetail> selectAllCarDetailLessSeatCnt(int cnt) {
+		List<CarDetail> list=carDao.selectAllCarDetailLessSeatCnt(cnt);
+		return list;
 	}
 
 }
