@@ -103,6 +103,12 @@ public class OrdersController {
     	  
       }
       if(state.equals("已还车")) {
+    		Car temp1=new Car();
+    		OrderDetail order=orderServiceImpl.selectOrderDetailById(Integer.parseInt(id));
+    		CarDetail car=carServiceImpl.selectCarDetailById(order.getCarid());
+			temp1.setId(car.getId());
+			temp1.setSurplusnum(car.getSurplusnum()+1);
+			carServiceImpl.updateCar(temp1);
     	  temp.setStilluid(loginUser.getUid());
     	  temp.setStilldate(new java.sql.Date(time.getTime()));  	 
           if(!location.equals("-1")) {
@@ -180,6 +186,11 @@ public class OrdersController {
 		
 		 
 		if(flag) {	
+			
+			Car temp1=new Car();
+			temp1.setId(car.getId());
+			temp1.setSurplusnum(car.getSurplusnum()-1);
+			carServiceImpl.updateCar(temp1);
 			out.print("<script type='text/javascript'>"
 					+ "alert('Success');"+"location.href='"+contextPath + "/client/index.html';"
 					+ "</script>");
