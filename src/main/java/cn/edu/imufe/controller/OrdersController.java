@@ -1,6 +1,8 @@
 package cn.edu.imufe.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,18 +19,21 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.edu.imufe.bean.Car;
 import cn.edu.imufe.bean.Customer;
 import cn.edu.imufe.bean.Orders;
 
 import cn.edu.imufe.bean.Users;
+import cn.edu.imufe.bean.vo.CarDetail;
 import cn.edu.imufe.bean.vo.OrderDetail;
-
+import cn.edu.imufe.service.impl.CarServiceImpl;
 import cn.edu.imufe.service.impl.OrdersServiceImpl;
 
 @Controller
 @RequestMapping(value="/orders")
 public class OrdersController {
 	@Autowired private OrdersServiceImpl orderServiceImpl;
+	@Autowired private CarServiceImpl carServiceImpl;
 	/**
 	 * 获取所有订单
 	 * @param request
@@ -92,12 +97,17 @@ public class OrdersController {
       if(state.equals("已取车")) {
     	  temp.setExtractuid(loginUser.getUid());
     	  temp.setExtractdate(new java.sql.Date(time.getTime()));
-    	  temp.setExtractlocation(location);
+    	  if(!location.equals("-1")) {
+    		  temp.setExtractlocation(location);
+    	  }
+    	  
       }
       if(state.equals("已还车")) {
     	  temp.setStilluid(loginUser.getUid());
-    	  temp.setStilldate(new java.sql.Date(time.getTime()));
-    	  temp.setStilllocation(location);
+    	  temp.setStilldate(new java.sql.Date(time.getTime()));  	 
+          if(!location.equals("-1")) {
+	      temp.setStilllocation(location);
+    	  }
       }
        orderServiceImpl.updateOrders(temp);
        return "redirect:../management/orders_list.html";
@@ -122,5 +132,66 @@ public class OrdersController {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;character=UTF-8");
 		response.getWriter().write(jsonObject.toString());
+    }
+	/**
+	 * 添加订单
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/addOrder")
+    public void addOrder(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException, Exception{
+		String contextPath = request.getContextPath();
+		 PrintWriter out = response.getWriter();
+		Customer temp=(Customer) request.getSession().getAttribute("loginCustomer");
+		if(temp==null) {
+			out.print("<script type='text/javascript'>"
+					+ "alert('Login expired');"+"location.href='"+contextPath + "/client/signin.html';"
+					+ "</script>");
+			out.flush();
+			out.close();
+		}
+		String carid=request.getParameter("carid");
+		String starttime=request.getParameter("starttime");
+		String endtime=request.getParameter("endtime");
+		String location1=request.getParameter("location1");
+		String location2=request.getParameter("location2");
+		Orders order=new Orders();
+		order.setExtractlocation(location1);
+		order.setStilllocation(location2);
+		order.setCarid(Integer.parseInt(carid));
+		order.setCid(temp.getCid());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate=sdf.parse(starttime);
+		Date endDate=sdf.parse(endtime);
+		order.setStarttime(startDate);
+		order.setEndtime(endDate);
+		order.setState("已预约");
+		CarDetail car=carServiceImpl.selectCarDetailById(Integer.parseInt(carid));
+		long stateTimeLong = startDate.getTime();
+		long endTimeLong = endDate.getTime();
+		// 结束时间-开始时间 = 天数
+		
+		int price=(int) (car.getPrice()*((endTimeLong-stateTimeLong)/(24*60*60*1000)));
+		order.setPricecnt(price);
+		boolean flag=orderServiceImpl.addOrders(order);
+		
+		 
+		if(flag) {	
+			out.print("<script type='text/javascript'>"
+					+ "alert('Success');"+"location.href='"+contextPath + "/client/index.html';"
+					+ "</script>");
+			out.flush();
+			out.close();
+		}
+		if(flag) {	
+			out.print("<script type='text/javascript'>"
+					+ "alert('Error');"+"location.href='"+contextPath + "/client/index.html';"
+					+ "</script>");
+			out.flush();
+			out.close();
+		}
     }
 }

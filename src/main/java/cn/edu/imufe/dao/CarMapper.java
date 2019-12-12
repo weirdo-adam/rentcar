@@ -43,4 +43,7 @@ public interface CarMapper {
     List<CarDetail> selectAllCarDetailMoreSeatCnt(Integer cnt);
     
     List<CarDetail> selectAllCarDetailLessSeatCnt(Integer cnt);
+    
+
+    List<CarDetail> selectAllCarDetailByCarName(String name);
 }

@@ -96,8 +96,8 @@
 			</ul>
 	  </div>
 	  <div class="navigation__column right">
-		<form class="ps-search--header" action="#" method="post">
-		  <input class="form-control" type="text" placeholder="搜索">
+			<form class="ps-search--header" action="../car/find" method="post">
+		  <input class="form-control" type="text" name="carname" placeholder="搜索">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>
 		</div>
@@ -201,9 +201,21 @@ function showAll(){
 				var date4=new Date(data[i].extractdate);
         	    var mydate4=date4.getFullYear()+"-"+(date4.getMonth()+1)+"-"+date4.getDate()+" "+date4.getHours()+"："+date4.getMinutes()+"："+date4.getSeconds();
         	    var date5=new Date(data[i].stilldate);
-      	    var mydate5=date5.getFullYear()+"-"+(date5.getMonth()+1)+"-"+date5.getDate()+" "+date5.getHours()+"："+date5.getMinutes()+"："+date5.getSeconds();
-				options+="<div class='grid-item'><div class='grid-item__content-wrapper'><div class='ps-shoe mb-30'><div class='ps-shoe__thumbnail'>"
-					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#取车地点："+data[i].extractlocation+"</a></div>"	
+      	        var mydate5=date5.getFullYear()+"-"+(date5.getMonth()+1)+"-"+date5.getDate()+" "+date5.getHours()+"："+date5.getMinutes()+"："+date5.getSeconds();
+				if(data[i].extractdate==null){
+					mydate4="-";
+				}
+                if(data[i].extractdate==null){
+                	mydate5="-";
+				}
+                var date6=new Date(data[i].starttime);
+        	    var mydate6=date6.getFullYear()+"-"+(date6.getMonth()+1)+"-"+date6.getDate();
+        	    var date7=new Date(data[i].endtime);
+      	        var mydate7=date7.getFullYear()+"-"+(date7.getMonth()+1)+"-"+date7.getDate();
+      	        options+="<div class='grid-item'><div class='grid-item__content-wrapper'><div class='ps-shoe mb-30'><div class='ps-shoe__thumbnail'>"
+					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#订单开始时间："+mydate6+"</a></div>"
+					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#订单结束时间："+mydate7+"</a></div>"
+      	        +"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#取车地点："+data[i].extractlocation+"</a></div>"	
 					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#取车时间："+mydate4+"</a></div>"
 					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#还车地点："+data[i].stilllocation+"</a></div>"
 					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='#'>"+"#还车时间："+mydate5+"</a></div>"

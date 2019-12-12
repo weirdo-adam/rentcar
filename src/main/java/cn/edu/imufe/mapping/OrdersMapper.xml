@@ -421,8 +421,6 @@ and a.stilluid=d.uid
 from orders a,customer b,users c,users d,car e
 where a.carid=e.id
 and a.cid=b.cid
-and a.extractuid=c.uid
-and a.stilluid=d.uid
 and a.oid=#{oid}
   </select>
   
@@ -431,8 +429,6 @@ and a.oid=#{oid}
 from orders a,customer b,users c,users d,car e
 where a.carid=e.id
 and a.cid=b.cid
-and a.extractuid=c.uid
-and a.stilluid=d.uid
 and a.cid=#{cid}
   </select>
 </mapper>

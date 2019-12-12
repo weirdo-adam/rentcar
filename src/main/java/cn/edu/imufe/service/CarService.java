@@ -16,4 +16,5 @@ public interface CarService {
       List<CarDetail> selectCarDetailByLocationId(int locationid);
       List<CarDetail> selectAllCarDetailMoreSeatCnt(int cnt);
       List<CarDetail> selectAllCarDetailLessSeatCnt(int cnt);
+      List<CarDetail> selectAllCarDetailByCarName(String name);
 }

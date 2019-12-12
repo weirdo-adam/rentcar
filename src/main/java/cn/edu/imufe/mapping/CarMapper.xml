@@ -403,4 +403,11 @@ WHERE a.brandid=b.brandid
 and a.cartypeid=c.typeid
 and a.seatcnt <![CDATA[ < ]]> #{cnt}
   </select>
+           <select id="selectAllCarDetailByCarName" resultMap="BaseResultMap1" parameterType="String" >
+      SELECT a.*,c.typename,b.brandname
+from car a,brand b,cartype c
+WHERE a.brandid=b.brandid
+and a.cartypeid=c.typeid
+and a.name like concat('%',#{name},'%')
+  </select>
 </mapper>

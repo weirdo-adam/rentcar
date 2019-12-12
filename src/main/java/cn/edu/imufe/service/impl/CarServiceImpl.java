@@ -68,5 +68,10 @@ public class CarServiceImpl implements CarService {
 		List<CarDetail> list=carDao.selectAllCarDetailLessSeatCnt(cnt);
 		return list;
 	}
+	@Override
+	public List<CarDetail> selectAllCarDetailByCarName(String name) {
+		List<CarDetail> list=carDao.selectAllCarDetailByCarName(name);
+		return list;
+	}
 
 }

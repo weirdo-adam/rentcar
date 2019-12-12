@@ -56,7 +56,7 @@
 					</div>
 				  </div>
 				</div>
-			
+			  </li>
 			   <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">车型</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
@@ -69,6 +69,7 @@
 				  </div>
 				</div>
 			  </li>
+			  
 			     <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">座位数</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
@@ -113,114 +114,23 @@
 	<p class="ps-service"><strong>海王</strong>: 来我的鱼塘，成为我的海王</p>
   </div>
 </div>
-
-
 <main class="ps-main">
-  <div class="test">
-	<div class="container">
-	  <div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-			</div>
-	  </div>
-	</div>
-  </div>
-  <div class="ps-product--detail pt-60">
+ 
+  <div class="ps-section--features-product ps-section masonry-root pt-100 pb-100">
 	<div class="ps-container">
-	   <div class="row">
-		<div class="col-lg-10 col-md-12 col-lg-offset-1">
-		
-		  <div class="ps-product__content mt-50">
-			<ul class="tab-list" role="tablist">
-			
-			  <li ><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">填写订单</a></li>
-			</ul>
-		  </div>
-		  <div class="tab-content mb-60">
-			<!--修改资料-->
-			<div class="tab-pane" role="tabpanel" id="tab_02">
-			  <form class="ps-product__review" action="../orders/addOrder" method="post" enctype="multipart/form-data">
-				<h4>订单信息</h4>
-					<div class="row">
-					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-					  <input type="hidden" name="carid" id="carid">
-					  <input type="hidden" name="starttime" id="starttime">
-					  <input type="hidden" name="endtime" id="endtime">
-						<div class="form-group">
-						  <label>车辆名称:<span>*</span></label>
-						  <input class="form-control" id="carname" name="carname" type="text" placeholder="" required="" disabled>
-						</div>
-						<div class="form-group">
-						  <label>租车时间:<span>*</span></label>
-						  <input class="form-control" id="comparedate" name="comparedate" type="text" placeholder="-" required="" >
-						</div>
-						<div class="form-group">
-						  <label>取车地点<span></span></label>
-						  <select  id="locations-list1" name="location1" required="">
-						  <option value="">请选择</option>
-						  </select>
-						</div>
-						<div class="form-group">
-						  <label>还车地点<span></span></label>
-						  <select  id="locations-list2" name="location2" required="">
-							 <option value="">请选择</option>
-						  </select>
-						</div>
-					  </div>
-					  <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
-						
-						<div class="form-group">
-						  <button class="ps-btn ps-btn--sm">Submit<i class="ps-icon-next"></i></button>
-						</div>
-					  </div>
-				</div>
-			  </form>
-			</div>
-			
-			
+	  <div class="ps-section__header mb-50">
+		<h3 class="ps-section__title" data-mask="车辆">- 车辆</h3>
+	  </div>
+	  <div class="ps-section__content pb-50">
+		<div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
+		  <div class="ps-masonry" id="cars-list">
 		  </div>
 		</div>
 	  </div>
 	</div>
   </div>
- 
- 
 </main>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-<script src="laydate/laydate.js"></script>
-    		<script>
-			//执行一个laydate实例
-		laydate.render({
-				elem: '#comparedate',
-				type: 'datetime',
-				range: true,
-				done: function(value, date, endDate) {
-					var year1= date.year;
-					var month1 = date.month;
-					var date1 = date.date;
-					var year2= endDate.year;
-					var month2 = endDate.month;
-					var date2 = endDate.date;
-				      if (month1 >= 1 && month1 <= 9) {
-				          month1 = "0" + month1;
-				      }
-				      if (date1 >= 0 && date1 <= 9) {
-				    	  date1 = "0" + date1;
-				      }
-				      if (month2 >= 1 && month2 <= 9) {
-				          month2 = "0" + month2;
-				      }
-				      if (date2 >= 0 && date2 <= 9) {
-				    	  date2 = "0" + date2;
-				      }
-					var date1=year1 + "-" + month1 + "-" + date1;
-					var date2=year2 + "-" + month2 + "-" + date2;
-					$("#starttime").val(date1);
-					$("#endtime").val(date2);
-				    
-				}
-
-			});
-		</script>
 <script type="text/javascript">
 var xhr = new XMLHttpRequest();
 function showCarTypes(){
@@ -262,51 +172,42 @@ function showLocation(){
 				options+="<li>"+data[i].locationname+"</td><td>"
 				+"<a href='cars_list.html?flag=1&locationid="+data[i].locationid+"'>"
 						+data[i].locationname+"</a></li>";
-				options1+="<option value='"+data[i].locationname+"'>"+data[i].locationname+"</option>";
+			
 			}
 			
 				//document.getElementById("table1").innerHTML+=options;
 		    $("#types-item1").append(options);
-		    $("#locations-list1").append(options1);
-		    $("#locations-list2").append(options1);
+		    
 		}
 	}
 	
 	xhr.send(null);
 }
-
 function showAll(){
-	var options="";
-	var options="";
-	//获取Location对象的search属性值
-	var searchStr = location.search;
-	 
-	//由于searchStr属性值包括“?”，所以除去该字符
-	searchStr = searchStr.substr(1);
-	 
-	//将searchStr字符串分割成数组，数组中的每一个元素为一个参数和参数值
-	var searchs = searchStr.split("&");
-	 
-	//获得第一个参数和值
-	var carid = searchs[0].split("=");
-	
-	xhr.open("get", "../car/selectCarDetail?id="+carid[1], false);
+var options="";
+	xhr.open("get", "../car/getAllCarDetailByCarName", false);
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4&&xhr.status==200){
 			var temp = xhr.responseText;
 			var json = eval('('+temp+')');
 			var data = json.listData;
+			for(var i in data){
+				options+="<div class='grid-item'><div class='grid-item__content-wrapper'><div class='ps-shoe mb-30'><div class='ps-shoe__thumbnail'><img src='"
+					+data[i].alist[0].aurl+"'></div><div class='ps-shoe__content'>"
+					+"<div class='ps-shoe__detail'><a class='ps-shoe__name' href='carDetail.html?carid="+data[i].carDetail.id+"'>"+data[i].carDetail.name+"</a>"
+					 +"<p class='ps-shoe__categories'>"+"日租价："+data[i].carDetail.price+"</p>"
+					+"</div></div></div></div></div>";
+
+			}
 			
-	
-		    $("#carname").val(data.name);
-		    $("#carid").val(data.id);
-		   
+				//document.getElementById("table1").innerHTML+=options;
+		    $("#cars-list").append(options);
+		
 		}
 	}
 	
 	xhr.send(null);
 }
-
      (function(){
     	 showCarTypes();
     	 showLocation();

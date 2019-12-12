@@ -340,4 +340,52 @@ public class CarController {
 		response.setContentType("application/json;character=UTF-8");
 		response.getWriter().write(jsonObject.toString());
     }
+	/**
+	 * 模糊匹配跳转页面
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/find")
+    public String find(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+	   String carname=request.getParameter("carname");
+	   request.getSession().setAttribute("carname", carname);
+	   return "redirect:../client/find_list.html";
+	      
+	}
+	
+	/**
+	 * 模糊匹配获取所有车辆详细信息
+	 * @param request
+	 * @param model
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/getAllCarDetailByCarName")
+    public void getAllCarDetailByCarName(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException{
+        
+		String key=(String) request.getSession().getAttribute("carname");
+		
+		List<CarDetailAndPhoto> lists=new ArrayList<CarDetailAndPhoto>();
+		
+			List<CarDetail> list=carServiceImpl.selectAllCarDetailByCarName(key);
+		for(CarDetail car : list) {
+			CarDetailAndPhoto temp=new CarDetailAndPhoto();
+			temp.setCarDetail(car);
+			List<Appearance> alist=appearanceServiceImpl.selectByCarId(car.getId());
+			temp.setAlist(alist);
+			lists.add(temp);
+		
+		}
+		
+        JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(lists));  
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("listData", jsonArray);
+		System.out.println(jsonObject);
+		response.setContentType("text/json"); 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;character=UTF-8");
+		response.getWriter().write(jsonObject.toString());
+    }
 }

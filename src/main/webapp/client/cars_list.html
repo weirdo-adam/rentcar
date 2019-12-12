@@ -96,8 +96,8 @@
 			</ul>
 	  </div>
 	  <div class="navigation__column right">
-		<form class="ps-search--header" action="#" method="post">
-		  <input class="form-control" type="text" placeholder="搜索">
+			<form class="ps-search--header" action="../car/find" method="post">
+		  <input class="form-control" type="text" name="carname" placeholder="搜索">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>
 		</div>
@@ -185,7 +185,7 @@ function showLocation(){
 }
 function showAll(){
 	var options="";
-	var options="";
+
 	//获取Location对象的search属性值
 	var searchStr = location.search;
 	 
